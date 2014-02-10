@@ -7,7 +7,6 @@ import contextlib
 
 from setuptools import setup, find_packages
 from setuptools.command.develop import develop as DevelopCommand
-from setuptools.command.test import test as TestCommand
 
 
 class SetupDevelop(DevelopCommand):
@@ -51,20 +50,6 @@ class SetupDevelop(DevelopCommand):
                 print("Hooks folder already exists. Step skipped")
 
 
-class PyTest(TestCommand):
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-
-        self.test_args = ['-v']
-        self.test_suite = True
-
-    def run_tests(self):
-        #import here, cause outside the eggs aren't loaded
-        import pytest
-        errno = pytest.main(self.test_args)
-        sys.exit(errno)
-
-
 @contextlib.contextmanager
 def label_operation(msg, after=' ---- DONE'):
     """
@@ -85,5 +70,4 @@ if __name__ == '__main__':
           author_email='lin.salisbury@gmail.com',
           url='http://github.com/d3vz3r0/retryable',
           packages=find_packages(),
-          cmdclass={'develop': SetupDevelop,
-                    'test': PyTest})
+          cmdclass={'develop': SetupDevelop})

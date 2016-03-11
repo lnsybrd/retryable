@@ -4,7 +4,6 @@ logging.basicConfig(level=logging.DEBUG)
 
 from retryable import retry
 
-
 # The function to put under test
 def _test_retry(_type_to_raise=None):
     _test_retry.call_count += 1
@@ -38,7 +37,7 @@ def test_retry_count():
         yield _test_retry_count, (x)
 
 
-def _test_retry_count(retry_count=2, retry_delay=.01):
+def _test_retry_count(retry_count=0, retry_delay=.01):
 
     # function
     _under_test = retry(count=retry_count,

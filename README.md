@@ -115,4 +115,3 @@ These params are passed when the wrapped function is called, not when it is deco
 
     # Retry this up to 3 times and start with a delay of half a second.
     ret = some_function(_retry_count=3, _retry_delay=.5)
-
